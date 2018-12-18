@@ -42,8 +42,3 @@ ex:
 
 (defn close! [producer]
   (.shutdown producer))
-
-(def t (producer "cshtestp" :default "192.168.1.29:9876"))
-(dotimes [n 100]
-  (send! t {:topic "testtop" :tag "testtag"} (.getBytes (str "hello-" n))))
-(close! t)

@@ -26,7 +26,7 @@ clone from https://github.com/L-jasmine/rocket-cl.
 
 (close! c)
 
-(def p (producer "cshtestp" :default "192.168.1.29:9876"))
+(def p (producer "cshtestp" :default "127.0.0.1:9876"))
 (dotimes [n 100]
   (send! p {:topic "testtop" :tag "testtag"} (.getBytes (str "hello-" n))))
 (close! p)
