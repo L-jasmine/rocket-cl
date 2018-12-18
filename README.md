@@ -1,25 +1,36 @@
 # rocket-cl
 
-FIXME: description
+一个rocketmq-client的简单封装
+a rocketmq-client for clojure
 
 ## Installation
 
-Download from http://example.com/FIXME.
+clone from https://github.com/L-jasmine/rocket-cl.
 
 ## Usage
 
-FIXME: explanation
-
-    $ java -jar rocket-cl-0.1.0-standalone.jar [args]
 
 ## Options
 
-FIXME: listing of options this app accepts.
 
 ## Examples
+```clojure
+(def c (pushconsumer "testsumer" "127.0.0.1:9876"
+{:tag "*" :topic "testtop" :consume-from :last}
+  (fn [this msgs context]
+    (prn "msg:" (vec (map #(String. (.getBody %)) msgs)))
+    true
+  )
+))
 
-...
+(close! c)
 
+(def p (producer "cshtestp" :default "192.168.1.29:9876"))
+(dotimes [n 100]
+  (send! p {:topic "testtop" :tag "testtag"} (.getBytes (str "hello-" n))))
+(close! p)
+
+```
 ### Bugs
 
 ...
